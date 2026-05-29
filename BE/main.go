@@ -36,9 +36,9 @@ func locationsHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/characters", charactersHandler)
-	http.HandleFunc("/episodes", episodeHandler)
-	http.HandleFunc("/locations", locationsHandler)
+	http.HandleFunc("/api/characters", charactersHandler)
+	http.HandleFunc("/api/episodes", episodeHandler)
+	http.HandleFunc("/api/locations", locationsHandler)
 	fmt.Println("сервер запущен по пути http://localhost:8080")
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
