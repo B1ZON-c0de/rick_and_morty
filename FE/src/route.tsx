@@ -14,7 +14,7 @@ interface RouteConfig {
   element: ReactNode;
 }
 
-export const ROUTES: Record<string, RouteConfig> = {
+export const ROUTES = {
   home: { path: "/", element: <Home /> },
   characterList: { path: "/characters", element: <CharactersList /> },
   characterItem: { path: "/characters/:id", element: <CharacterItem /> },
@@ -22,4 +22,4 @@ export const ROUTES: Record<string, RouteConfig> = {
   locationItem: { path: "/locations/:id", element: <LocationItem /> },
   episodeList: { path: "/episodes", element: <EpisodesList /> },
   episodeItem: { path: "/episodes/:id", element: <EpisodeItem /> },
-} as const;
+} as const satisfies Record<string, RouteConfig>;
