@@ -16,7 +16,7 @@ export function CharactersList() {
         <ul>
           {data.map((character) => (
             <li key={character.id}>
-              <Link to={ROUTES.characterList + "/" + character.id}>
+              <Link to={ROUTES.characterList.path + "/" + character.id}>
                 {character.name}
               </Link>
             </li>
