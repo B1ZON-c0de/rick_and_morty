@@ -3,18 +3,18 @@ import { useEffect, useState } from "react";
 export const useFetch = <T>(url: string) => {
   const [error, setError] = useState<string>("");
   const [data, setData] = useState<T | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = async () => {
     setError("");
+    setIsLoading(true);
     try {
-      setIsLoading(true);
       const res = await fetch("http://localhost:8080/api" + url);
       if (!res.ok) {
         return null;
       }
       const json = await res.json();
-      setData(json);
+      setData(json.data);
     } catch (e) {
       if (e instanceof Error) {
         setError(e.message);
