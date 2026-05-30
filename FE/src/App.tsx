@@ -6,7 +6,7 @@ const App = () => {
     <>
       <Routes>
         {Object.keys(ROUTES).map((key) => (
-          <Route path={ROUTES[key].path} element={ROUTES[key].path} />
+          <Route path={ROUTES[key].path} element={ROUTES[key].element} />
         ))}
       </Routes>
     </>
