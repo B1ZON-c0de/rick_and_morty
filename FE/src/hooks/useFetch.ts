@@ -6,6 +6,7 @@ export const useFetch = async <T>(url: string) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async () => {
+    setError("");
     try {
       setIsLoading(true);
       const res = await fetch("http://localhost:8080/api" + url);
