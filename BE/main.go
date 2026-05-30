@@ -6,6 +6,21 @@ import (
 	"net/http"
 )
 
+func corsMiddleware(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "GET")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
+		if r.Method == http.MethodOptions {
+			w.WriteHeader(http.StatusNoContent)
+			return
+		}
+
+		next(w, r)
+	}
+}
+
 func charactersHandler(w http.ResponseWriter, r *http.Request) {
 	characters, err := ParseJSONFile("characters.json")
 	if err != nil {
@@ -36,9 +51,9 @@ func locationsHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/api/characters", charactersHandler)
-	http.HandleFunc("/api/episodes", episodeHandler)
-	http.HandleFunc("/api/locations", locationsHandler)
+	http.HandleFunc("/api/characters", corsMiddleware(charactersHandler))
+	http.HandleFunc("/api/episodes", corsMiddleware(episodeHandler))
+	http.HandleFunc("/api/locations", corsMiddleware(locationsHandler))
 	fmt.Println("сервер запущен по пути http://localhost:8080")
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
