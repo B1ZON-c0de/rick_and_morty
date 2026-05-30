@@ -1,3 +1,31 @@
+import { Link } from "react-router-dom";
+import { useFetch } from "../hooks/useFetch";
+import type { ICharacter } from "../types";
+import { ROUTES } from "../route";
+
 export function CharactersList() {
-  return <div>CharacterList</div>;
+  const { isLoading, data, error } = useFetch<ICharacter[]>("/characters");
+
+  return (
+    <>
+      {isLoading ? (
+        "Загрузка"
+      ) : error ? (
+        error
+      ) : (
+        <ul>
+          {data.map((character) => (
+            <li key={character.id}>
+              <Link
+                to={ROUTES.characterList.path + "/" + character.id}
+                state={character}
+              >
+                {character.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
+  );
 }
