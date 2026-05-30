@@ -15,7 +15,10 @@ export function LocationsList() {
         <ul>
           {data.map((location) => (
             <li key={location.id}>
-              <Link to={ROUTES.locationList.path + "/" + location.id}>
+              <Link
+                to={ROUTES.locationList.path + "/" + location.id}
+                state={location}
+              >
                 {location.name}
               </Link>
             </li>
