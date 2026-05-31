@@ -1,13 +1,21 @@
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useFetch } from "../hooks/useFetch";
+import type { IEpisode } from "../types";
+
+function EpisodeInfo({ name, air_date, episode }: IEpisode) {
+  return (
+    <>
+      <p>Имя {name}</p>
+      <p>Дата выхода {air_date}</p>
+      <p>Эпизод {episode}</p>
+    </>
+  );
+}
 
 export function EpisodeItem() {
-  const { state } = useLocation();
-
+  const { id } = useParams();
+  const { data, isLoading, error } = useFetch<IEpisode>("/episodes/" + id);
   return (
-    <div>
-      <h1>{state.name}</h1>
-      <p>{state.air_date}</p>
-      <p>{state.episode}</p>
-    </div>
+    <>{isLoading ? "Загрузка" : error ? error : <EpisodeInfo {...data} />}</>
   );
 }
