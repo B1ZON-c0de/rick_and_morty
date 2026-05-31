@@ -7,6 +7,10 @@ import (
 	"net/http"
 )
 
+var (
+	ErrNotFoundId = errors.New("такого идеинтификатора не существует")
+)
+
 func corsMiddleware(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -46,7 +50,25 @@ func characterItemHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	respondWithError(w, errors.New("такого идеинтификатора не существует"))
+	respondWithError(w, ErrNotFoundId)
+}
+
+func episodeItemHandler(w http.ResponseWriter, r *http.Request) {
+	id := r.PathValue("id")
+	episodes, err := ParseJSONFile("episode.json")
+	if err != nil {
+		respondWithError(w, err)
+		return
+	}
+
+	for _, episode := range episodes {
+		if fmt.Sprintf("%v", episode["id"]) == id {
+			respondWithOneJSON(w, episode)
+			return
+		}
+	}
+
+	respondWithError(w, ErrNotFoundId)
 }
 
 func episodeHandler(w http.ResponseWriter, r *http.Request) {
@@ -75,6 +97,7 @@ func main() {
 	mux.HandleFunc("/api/characters", corsMiddleware(charactersHandler))
 	mux.HandleFunc("/api/characters/{id}", corsMiddleware(characterItemHandler))
 	mux.HandleFunc("/api/episodes", corsMiddleware(episodeHandler))
+	mux.HandleFunc("/api/episodes/{id}", corsMiddleware(episodeItemHandler))
 	mux.HandleFunc("/api/locations", corsMiddleware(locationsHandler))
 
 	fmt.Println("сервер запущен по пути http://localhost:8080")
