@@ -14,9 +14,6 @@ export const useFetch = <T>(url: string) => {
     setIsLoading(true);
     try {
       const res = await fetch("http://localhost:8080/api" + url);
-      if (!res.ok) {
-        return null;
-      }
       const json = await res.json();
       const resError: IError["error"] | undefined = json?.error;
       if (resError) {
