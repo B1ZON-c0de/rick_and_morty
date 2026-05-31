@@ -51,11 +51,15 @@ func locationsHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/api/characters", corsMiddleware(charactersHandler))
-	http.HandleFunc("/api/episodes", corsMiddleware(episodeHandler))
-	http.HandleFunc("/api/locations", corsMiddleware(locationsHandler))
+	mux := http.NewServeMux()
+
+	mux.HandleFunc("/api/characters", corsMiddleware(charactersHandler))
+	mux.HandleFunc("/api/episodes", corsMiddleware(episodeHandler))
+	mux.HandleFunc("/api/locations", corsMiddleware(locationsHandler))
+
 	fmt.Println("сервер запущен по пути http://localhost:8080")
-	err := http.ListenAndServe(":8080", nil)
+
+	err := http.ListenAndServe(":8080", mux)
 	if err != nil {
 		fmt.Printf("Ошибка запуска сервера: %v", err)
 	}
