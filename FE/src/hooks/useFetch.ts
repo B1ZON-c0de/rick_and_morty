@@ -6,7 +6,7 @@ interface IError {
 
 export const useFetch = <T>(url: string) => {
   const [error, setError] = useState<string>("");
-  const [data, setData] = useState<T | null | IError>(null);
+  const [data, setData] = useState<T | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = async () => {
@@ -18,7 +18,7 @@ export const useFetch = <T>(url: string) => {
         return null;
       }
       const json = await res.json();
-      const resError = json?.error;
+      const resError: IError["error"] | undefined = json?.error;
       if (resError) {
         setError(resError);
         return;
