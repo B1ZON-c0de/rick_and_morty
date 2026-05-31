@@ -15,10 +15,7 @@ export function EpisodesList() {
         <ul>
           {data.map((episode) => (
             <li key={episode.id}>
-              <Link
-                to={ROUTES.episodeList.path + "/" + episode.id}
-                state={episode}
-              >
+              <Link to={ROUTES.episodeList.path + "/" + episode.id}>
                 {episode.name}
               </Link>
             </li>

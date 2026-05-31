@@ -18,7 +18,6 @@ const App = () => {
           <NavLink to={ROUTES.episodeList.path}>Эпизоды</NavLink>
         </li>
       </ul>
-      <h1>HELLO RICK and MORTY</h1>
       <Routes>
         {Object.keys(ROUTES).map((key) => (
           <Route path={ROUTES[key].path} element={ROUTES[key].element} />

@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 
+interface IError {
+  error: string;
+}
+
 export const useFetch = <T>(url: string) => {
   const [error, setError] = useState<string>("");
   const [data, setData] = useState<T | null>(null);
@@ -10,10 +14,12 @@ export const useFetch = <T>(url: string) => {
     setIsLoading(true);
     try {
       const res = await fetch("http://localhost:8080/api" + url);
-      if (!res.ok) {
-        return null;
-      }
       const json = await res.json();
+      const resError: IError["error"] | undefined = json?.error;
+      if (resError) {
+        setError(resError);
+        return;
+      }
       setData(json.data);
     } catch (e) {
       if (e instanceof Error) {
