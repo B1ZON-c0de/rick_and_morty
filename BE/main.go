@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 )
@@ -30,6 +31,24 @@ func charactersHandler(w http.ResponseWriter, r *http.Request) {
 	respondWithJSON(w, characters)
 }
 
+func characterItemHandler(w http.ResponseWriter, r *http.Request) {
+	id := r.PathValue("id")
+	characters, err := ParseJSONFile("characters.json")
+	if err != nil {
+		respondWithError(w, err)
+		return
+	}
+
+	for _, character := range characters {
+		if fmt.Sprintf("%v", character["id"]) == id {
+			respondWithOneJSON(w, character)
+			return
+		}
+	}
+
+	respondWithError(w, errors.New("такого идеинтификатора не существует"))
+}
+
 func episodeHandler(w http.ResponseWriter, r *http.Request) {
 	episodes, err := ParseJSONFile("episode.json")
 	if err != nil {
@@ -54,6 +73,7 @@ func main() {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/api/characters", corsMiddleware(charactersHandler))
+	mux.HandleFunc("/api/characters/{id}", corsMiddleware(characterItemHandler))
 	mux.HandleFunc("/api/episodes", corsMiddleware(episodeHandler))
 	mux.HandleFunc("/api/locations", corsMiddleware(locationsHandler))
 
@@ -68,6 +88,14 @@ func main() {
 func respondWithError(w http.ResponseWriter, err error) {
 	w.WriteHeader(http.StatusInternalServerError)
 	if err := json.NewEncoder(w).Encode(map[string]string{"error": err.Error()}); err != nil {
+		fmt.Errorf("Ошибка: %w", err)
+	}
+}
+
+func respondWithOneJSON(w http.ResponseWriter, itemJSON map[string]any) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	if err := json.NewEncoder(w).Encode(map[string]map[string]any{"data": itemJSON}); err != nil {
 		fmt.Errorf("Ошибка: %w", err)
 	}
 }
