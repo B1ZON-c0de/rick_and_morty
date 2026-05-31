@@ -81,6 +81,25 @@ func episodeHandler(w http.ResponseWriter, r *http.Request) {
 	respondWithJSON(w, episodes)
 }
 
+func locationItemHandler(w http.ResponseWriter, r *http.Request) {
+	id := r.PathValue("id")
+	locations, err := ParseJSONFile("location.json")
+	if err != nil {
+		respondWithError(w, err)
+		return
+	}
+
+	for _, location := range locations {
+		if fmt.Sprintf("%v", location["id"]) == id {
+			respondWithOneJSON(w, location)
+			return
+		}
+	}
+
+	respondWithError(w, ErrNotFoundId)
+
+}
+
 func locationsHandler(w http.ResponseWriter, r *http.Request) {
 	locations, err := ParseJSONFile("location.json")
 	if err != nil {
@@ -99,6 +118,7 @@ func main() {
 	mux.HandleFunc("/api/episodes", corsMiddleware(episodeHandler))
 	mux.HandleFunc("/api/episodes/{id}", corsMiddleware(episodeItemHandler))
 	mux.HandleFunc("/api/locations", corsMiddleware(locationsHandler))
+	mux.HandleFunc("/api/locations/{id}", corsMiddleware(locationItemHandler))
 
 	fmt.Println("сервер запущен по пути http://localhost:8080")
 
