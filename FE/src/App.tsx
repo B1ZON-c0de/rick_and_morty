@@ -4,18 +4,38 @@ import { ROUTES } from "./route";
 const App = () => {
   return (
     <>
-      <ul>
+      <ul className="flex gap-2 text-xl justify-center mt-4">
         <li>
-          <NavLink to={ROUTES.home.path}>Главная</NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? "active" : "base-link")}
+            to={ROUTES.home.path}
+          >
+            Главная
+          </NavLink>
         </li>
         <li>
-          <NavLink to={ROUTES.characterList.path}>Персонажи</NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? "active" : "base-link")}
+            to={ROUTES.characterList.path}
+          >
+            Персонажи
+          </NavLink>
         </li>
         <li>
-          <NavLink to={ROUTES.locationList.path}>Локации</NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? "active" : "base-link")}
+            to={ROUTES.locationList.path}
+          >
+            Локации
+          </NavLink>
         </li>
         <li>
-          <NavLink to={ROUTES.episodeList.path}>Эпизоды</NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? "active" : "base-link")}
+            to={ROUTES.episodeList.path}
+          >
+            Эпизоды
+          </NavLink>
         </li>
       </ul>
       <Routes>
