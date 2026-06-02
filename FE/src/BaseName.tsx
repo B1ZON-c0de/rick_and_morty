@@ -8,7 +8,7 @@ export const BaseName = ({ label, text }: Props) => {
     <div>
       <p className="text-5xl text-green-700">
         <span className="font-semibold text-green-900">{label}: </span>
-        {text}
+        {text === "unknown" ? "Неизвестно" : text}
       </p>
     </div>
   );

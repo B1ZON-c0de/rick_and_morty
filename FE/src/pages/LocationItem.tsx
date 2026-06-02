@@ -1,14 +1,15 @@
 import { useParams } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
 import type { ILocation } from "../types";
+import { BaseName } from "../BaseName";
 
 function LocationInfo({ name, type, dimension }: ILocation) {
   return (
-    <>
-      <p>Имя {name}</p>
-      <p>Тип {type}</p>
-      <p>Измерение {dimension}</p>
-    </>
+    <div className="card m-6 flex flex-col w-full gap-4">
+      <BaseName label="Имя" text={name} />
+      <BaseName label="Тип" text={type} />
+      <BaseName label="Измерение" text={dimension} />
+    </div>
   );
 }
 
