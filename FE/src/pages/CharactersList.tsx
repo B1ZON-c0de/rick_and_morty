@@ -17,7 +17,7 @@ export function CharactersList() {
           {data.map((character) => (
             <li key={character.id}>
               <Link to={ROUTES.characterList.path + "/" + character.id}>
-                <div className=" flex flex-col gap-6 rounded-md bg-gray-50 border-2 border-transparent hover:border-green-600 transition-all duration-300 p-4">
+                <div className=" flex flex-col gap-6 rounded-md bg-gray-50 border-2 border-transparent hover:border-green-600 transition-all duration-300 hover:shadow-lg hover:bg-green-200 hover:-translate-1 p-4">
                   <img className="w-full object-cover" src={character.image} />
                   <h2 className="text-xl font-bold text-center">
                     {character.name}

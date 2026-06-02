@@ -4,7 +4,7 @@ import { ROUTES } from "./route";
 const App = () => {
   return (
     <>
-      <header className="sticky top-0 py-4 sticky-bg">
+      <header className="sticky top-0 py-4 sticky-bg z-99">
         <ul className="flex gap-2 text-xl justify-center">
           <li>
             <NavLink
