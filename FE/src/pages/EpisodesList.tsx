@@ -12,10 +12,13 @@ export function EpisodesList() {
       ) : error ? (
         error
       ) : (
-        <ul>
+        <ul className="list">
           {data.map((episode) => (
             <li key={episode.id}>
-              <Link to={ROUTES.episodeList.path + "/" + episode.id}>
+              <Link
+                className="hovered-card text-center text-xl font-bold"
+                to={ROUTES.episodeList.path + "/" + episode.id}
+              >
                 {episode.name}
               </Link>
             </li>
