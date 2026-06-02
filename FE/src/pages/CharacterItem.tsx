@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
 import type { ICharacter } from "../types";
+import { BaseName } from "../BaseName";
 
 function CharacterInfo({
   name,
@@ -11,14 +12,27 @@ function CharacterInfo({
   image,
 }: ICharacter) {
   return (
-    <>
-      <p>Имя: {name}</p>
-      <p>Статус: {status}</p>
-      <p>Род: {species}</p>
-      <p>Тип: {type}</p>
-      <p>Гендер: {gender}</p>
-      <img src={image} />
-    </>
+    <div className="flex gap-6 m-6">
+      <div className="w-1/2 card">
+        <img className="object-cover h-full w-full" src={image} />
+      </div>
+      <div className="w-1/2 card flex flex-col gap-4">
+        <BaseName label="Имя" text={name} />
+        <BaseName
+          label="Статус"
+          text={
+            status === "Alive"
+              ? "Жив"
+              : status === "Dead"
+                ? "Мёртв"
+                : "Неизвестно"
+          }
+        />
+        <BaseName label="Вид" text={species} />
+        {type && <BaseName label="Тип" text={type} />}
+        <BaseName label="Пол" text={gender} />
+      </div>
+    </div>
   );
 }
 
