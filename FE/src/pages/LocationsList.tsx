@@ -12,10 +12,13 @@ export function LocationsList() {
       ) : error ? (
         error
       ) : (
-        <ul>
+        <ul className="list">
           {data.map((location) => (
             <li key={location.id}>
-              <Link to={ROUTES.locationList.path + "/" + location.id}>
+              <Link
+                className="hovered-card text-center text-xl font-bold"
+                to={ROUTES.locationList.path + "/" + location.id}
+              >
                 {location.name}
               </Link>
             </li>

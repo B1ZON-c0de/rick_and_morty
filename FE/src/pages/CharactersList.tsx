@@ -13,11 +13,11 @@ export function CharactersList() {
       ) : error ? (
         error
       ) : (
-        <ul className="grid grid-cols-3 max-w-7xl mx-auto mt-6 gap-3">
+        <ul className="list">
           {data.map((character) => (
             <li key={character.id}>
               <Link to={ROUTES.characterList.path + "/" + character.id}>
-                <div className=" flex flex-col gap-6 rounded-md bg-gray-50 border-2 border-transparent hover:border-green-600 transition-all duration-300 hover:shadow-lg hover:bg-green-200 hover:-translate-1 p-4">
+                <div className=" hovered-card">
                   <img className="w-full object-cover" src={character.image} />
                   <h2 className="text-xl font-bold text-center">
                     {character.name}
