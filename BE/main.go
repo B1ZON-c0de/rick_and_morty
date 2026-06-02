@@ -129,7 +129,7 @@ func main() {
 }
 
 func respondWithError(w http.ResponseWriter, err error) {
-	w.WriteHeader(http.StatusInternalServerError)
+	w.WriteHeader(http.StatusNotFound)
 	if err := json.NewEncoder(w).Encode(map[string]string{"error": err.Error()}); err != nil {
 		fmt.Errorf("Ошибка: %w", err)
 	}
