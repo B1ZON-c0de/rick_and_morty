@@ -1,14 +1,15 @@
 import { useParams } from "react-router-dom";
 import { useFetch } from "../hooks/useFetch";
 import type { IEpisode } from "../types";
+import { BaseName } from "../BaseName";
 
 function EpisodeInfo({ name, air_date, episode }: IEpisode) {
   return (
-    <>
-      <p>Имя {name}</p>
-      <p>Дата выхода {air_date}</p>
-      <p>Эпизод {episode}</p>
-    </>
+    <div className="card m-6 flex flex-col gap-4">
+      <BaseName label="Имя" text={name} />
+      <BaseName label="Дата выхода" text={air_date} />
+      <BaseName label="Эпизод" text={episode} />
+    </div>
   );
 }
 
