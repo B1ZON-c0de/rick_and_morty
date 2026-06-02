@@ -135,7 +135,7 @@ func main() {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/api/characters", corsMiddleware(charactersHandler))
-	mux.HandleFunc("/api/characters/{id}", corsMiddleware(baseItemHandler("character.json")))
+	mux.HandleFunc("/api/characters/{id}", corsMiddleware(baseItemHandler("characters.json")))
 	mux.HandleFunc("/api/episodes", corsMiddleware(episodeHandler))
 	mux.HandleFunc("/api/episodes/{id}", corsMiddleware(baseItemHandler("episode.json")))
 	mux.HandleFunc("/api/locations", corsMiddleware(locationsHandler))
