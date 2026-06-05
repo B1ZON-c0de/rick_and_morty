@@ -11,15 +11,24 @@ import {
 
 interface RouteConfig {
   path: string;
+  name?: string;
   element: ReactNode;
 }
 
 export const ROUTES = {
-  home: { path: "/", element: <Home /> },
-  characterList: { path: "/character", element: <CharactersList /> },
+  home: { name: "Главная", path: "/", element: <Home /> },
+  characterList: {
+    name: "Персонажи",
+    path: "/character",
+    element: <CharactersList />,
+  },
   characterItem: { path: "/character/:id", element: <CharacterItem /> },
-  locationList: { path: "/location", element: <LocationsList /> },
+  locationList: {
+    name: "Локации",
+    path: "/location",
+    element: <LocationsList />,
+  },
   locationItem: { path: "/location/:id", element: <LocationItem /> },
-  episodeList: { path: "/episode", element: <EpisodesList /> },
+  episodeList: { name: "Эпизоды", path: "/episode", element: <EpisodesList /> },
   episodeItem: { path: "/episode/:id", element: <EpisodeItem /> },
 } as const satisfies Record<string, RouteConfig>;
