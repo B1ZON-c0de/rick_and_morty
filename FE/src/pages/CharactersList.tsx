@@ -4,7 +4,7 @@ import type { ICharacter } from "../types";
 import { ROUTES } from "../route";
 
 export function CharactersList() {
-  const { isLoading, data, error } = useFetch<ICharacter[]>("/characters");
+  const { isLoading, data, error } = useFetch<ICharacter[]>("/character");
 
   return (
     <>

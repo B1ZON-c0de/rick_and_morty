@@ -15,7 +15,7 @@ function LocationInfo({ name, type, dimension }: ILocation) {
 
 export function LocationItem() {
   const { id } = useParams();
-  const { data, isLoading, error } = useFetch<ILocation>("/locations/" + id);
+  const { data, isLoading, error } = useFetch<ILocation>("/location/" + id);
   return (
     <>{isLoading ? "Загрузка" : error ? error : <LocationInfo {...data} />}</>
   );

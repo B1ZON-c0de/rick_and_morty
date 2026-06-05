@@ -1,18 +1,19 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 
-interface IError {
-  error: string;
-}
-
-interface IResponse<T> {
+interface IResponseInfo {
   count: number;
   pages: number;
   next: number | null;
   prev: number | null;
-  result: T[];
 }
 
-export const useFetch = <T>(url: string) => {
+interface IResponse<T> {
+  info: IResponseInfo;
+  results: T;
+}
+
+export const useFetch = <T extends object>(url: string) => {
   const [error, setError] = useState<string>("");
   const [data, setData] = useState<T | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -21,14 +22,14 @@ export const useFetch = <T>(url: string) => {
     setError("");
     setIsLoading(true);
     try {
-      const res = await fetch("http://localhost:8080/api" + url);
-      const json = await res.json();
-      const resError: IError["error"] | undefined = json?.error;
-      if (resError) {
-        setError(resError);
-        return;
+      const res = await axios.get<IResponse<T> | T>(
+        "https://rickandmortyapi.com/api/" + url,
+      );
+      if ("results" in res.data) {
+        setData(res.data.results);
+      } else {
+        setData(res.data);
       }
-      setData(json.data);
     } catch (e) {
       if (e instanceof Error) {
         setError(e.message);

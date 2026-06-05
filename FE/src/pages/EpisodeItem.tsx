@@ -15,7 +15,7 @@ function EpisodeInfo({ name, air_date, episode }: IEpisode) {
 
 export function EpisodeItem() {
   const { id } = useParams();
-  const { data, isLoading, error } = useFetch<IEpisode>("/episodes/" + id);
+  const { data, isLoading, error } = useFetch<IEpisode>("/episode/" + id);
   return (
     <>{isLoading ? "Загрузка" : error ? error : <EpisodeInfo {...data} />}</>
   );

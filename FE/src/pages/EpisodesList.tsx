@@ -4,7 +4,7 @@ import { ROUTES } from "../route";
 import { Link } from "react-router-dom";
 
 export function EpisodesList() {
-  const { data, isLoading, error } = useFetch<IEpisode[]>("/episodes");
+  const { data, isLoading, error } = useFetch<IEpisode[]>("/episode");
   return (
     <>
       {isLoading ? (

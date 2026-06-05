@@ -4,7 +4,7 @@ import { ROUTES } from "../route";
 import { Link } from "react-router-dom";
 
 export function LocationsList() {
-  const { isLoading, data, error } = useFetch<ILocation[]>("/locations");
+  const { isLoading, data, error } = useFetch<ILocation[]>("/location");
   return (
     <>
       {isLoading ? (

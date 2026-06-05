@@ -38,7 +38,7 @@ function CharacterInfo({
 
 export function CharacterItem() {
   const { id } = useParams();
-  const { data, isLoading, error } = useFetch<ICharacter>("/characters/" + id);
+  const { data, isLoading, error } = useFetch<ICharacter>("/character/" + id);
   return (
     <>{isLoading ? "Загрузка" : error ? error : <CharacterInfo {...data} />}</>
   );
