@@ -4,6 +4,13 @@ interface IError {
   error: string;
 }
 
+interface IResponse {
+  count: number;
+  pages: number;
+  next: number | null;
+  prev: number | null;
+}
+
 export const useFetch = <T>(url: string) => {
   const [error, setError] = useState<string>("");
   const [data, setData] = useState<T | null>(null);
