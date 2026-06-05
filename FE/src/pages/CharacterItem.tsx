@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import type { ICharacter } from "../types";
-import { BaseName } from "../BaseName";
+import { BaseName } from "../components/BaseName";
 import { useFetchItem } from "../hooks/useFetchItem";
 
 function CharacterInfo({
