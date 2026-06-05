@@ -16,10 +16,10 @@ interface RouteConfig {
 
 export const ROUTES = {
   home: { path: "/", element: <Home /> },
-  characterList: { path: "/characters", element: <CharactersList /> },
-  characterItem: { path: "/characters/:id", element: <CharacterItem /> },
-  locationList: { path: "/locations", element: <LocationsList /> },
-  locationItem: { path: "/locations/:id", element: <LocationItem /> },
-  episodeList: { path: "/episodes", element: <EpisodesList /> },
-  episodeItem: { path: "/episodes/:id", element: <EpisodeItem /> },
+  characterList: { path: "/character", element: <CharactersList /> },
+  characterItem: { path: "/character/:id", element: <CharacterItem /> },
+  locationList: { path: "/location", element: <LocationsList /> },
+  locationItem: { path: "/location/:id", element: <LocationItem /> },
+  episodeList: { path: "/episode", element: <EpisodesList /> },
+  episodeItem: { path: "/episode/:id", element: <EpisodeItem /> },
 } as const satisfies Record<string, RouteConfig>;
