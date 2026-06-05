@@ -7,15 +7,15 @@ import type {
   ILocation,
 } from "../types";
 
-interface Props {
-  ListItem: ComponentType<IListChildrenProps>;
+interface Props<T> {
+  ListItem: ComponentType<IListChildrenProps<T>>;
   url: string;
 }
 
 export function BaseList<T extends ILocation | ICharacter | IEpisode>({
   ListItem,
   url,
-}: Props) {
+}: Props<T>) {
   const [pageNumber, setPageNumber] = useState(1);
   const { isLoading, data, error, hasMore } = useFetchList<T>(url, pageNumber);
 
@@ -43,9 +43,11 @@ export function BaseList<T extends ILocation | ICharacter | IEpisode>({
       <ul className="list">
         {data.map((item, idx) => {
           if (data.length === idx + 1) {
-            return <ListItem data={item} getLastNode={getLastNode} />;
+            return (
+              <ListItem key={item.id} data={item} getLastNode={getLastNode} />
+            );
           } else {
-            return <ListItem data={item} />;
+            return <ListItem key={item.id} data={item} />;
           }
         })}
       </ul>

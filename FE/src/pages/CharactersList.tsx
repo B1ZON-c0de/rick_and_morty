@@ -21,9 +21,6 @@ function RenderCharacters({
 
 export function CharactersList() {
   return (
-    <BaseList<ICharacter>
-      ListItem={RenderCharacters}
-      url={ROUTES.characterList.path}
-    />
+    <BaseList ListItem={RenderCharacters} url={ROUTES.characterList.path} />
   );
 }
