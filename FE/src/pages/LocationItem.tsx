@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
-import { useFetch } from "../hooks/useFetch";
 import type { ILocation } from "../types";
-import { BaseName } from "../BaseName";
+import { BaseName } from "../components/BaseName";
+import { useFetchItem } from "../hooks/useFetchItem";
+import { ROUTES } from "../route";
 
 function LocationInfo({ name, type, dimension }: ILocation) {
   return (
@@ -15,7 +16,9 @@ function LocationInfo({ name, type, dimension }: ILocation) {
 
 export function LocationItem() {
   const { id } = useParams();
-  const { data, isLoading, error } = useFetch<ILocation>("/locations/" + id);
+  const { data, isLoading, error } = useFetchItem<ILocation>(
+    ROUTES.locationList.path + "/" + id,
+  );
   return (
     <>{isLoading ? "Загрузка" : error ? error : <LocationInfo {...data} />}</>
   );
