@@ -1,8 +1,13 @@
 import { Routes, Route, NavLink } from "react-router-dom";
 import { ROUTES } from "./route";
-import { Suspense } from "react";
+import { lazy, Suspense } from "react";
 
 const App = () => {
+  const NotFound = lazy(() =>
+    import("./pages/NotFound").then((module) => ({
+      default: module.NotFound,
+    })),
+  );
   return (
     <>
       <header className="sticky top-0 py-4 sticky-bg z-99">
@@ -37,6 +42,7 @@ const App = () => {
               />
             );
           })}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
     </>
