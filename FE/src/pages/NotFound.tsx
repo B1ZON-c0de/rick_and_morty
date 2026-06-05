@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../route";
 
 export const NotFound = () => {
   const navigate = useNavigate();
@@ -7,7 +8,7 @@ export const NotFound = () => {
       <h1 className="text-9xl font-bold text-green-800">404</h1>
       <button
         className="btn-primary"
-        onClick={() => navigate("/", { replace: true })}
+        onClick={() => navigate(ROUTES.home.path, { replace: true })}
       >
         Вернуться на главную
       </button>
