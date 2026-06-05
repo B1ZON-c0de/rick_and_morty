@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 export interface ICharacter {
   id: number;
   name: string;
@@ -24,3 +26,10 @@ export interface IEpisode {
   episode: string;
   created: string;
 }
+
+export interface IListChildrenProps<T> {
+  data: T;
+  getLastNode?: (node: Element) => void;
+}
+
+export type IListChildren = <T>(props: IListChildrenProps<T>) => ReactNode;

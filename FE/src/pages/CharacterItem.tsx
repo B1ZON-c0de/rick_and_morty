@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
-import { useFetch } from "../hooks/useFetch";
 import type { ICharacter } from "../types";
-import { BaseName } from "../BaseName";
+import { BaseName } from "../components/BaseName";
+import { useFetchItem } from "../hooks/useFetchItem";
+import { ROUTES } from "../route";
 
 function CharacterInfo({
   name,
@@ -38,7 +39,9 @@ function CharacterInfo({
 
 export function CharacterItem() {
   const { id } = useParams();
-  const { data, isLoading, error } = useFetch<ICharacter>("/characters/" + id);
+  const { data, isLoading, error } = useFetchItem<ICharacter>(
+    ROUTES.characterList.path + "/" + id,
+  );
   return (
     <>{isLoading ? "Загрузка" : error ? error : <CharacterInfo {...data} />}</>
   );

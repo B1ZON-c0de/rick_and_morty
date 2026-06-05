@@ -1,30 +1,21 @@
-import { useFetch } from "../hooks/useFetch";
-import type { IEpisode } from "../types";
+import type { IEpisode, IListChildrenProps } from "../types";
 import { ROUTES } from "../route";
 import { Link } from "react-router-dom";
+import { BaseList } from "../components/BaseList";
+
+function RenderEpisodes({ data, getLastNode }: IListChildrenProps<IEpisode>) {
+  return (
+    <li ref={getLastNode}>
+      <Link
+        className="hovered-card text-center text-xl font-bold"
+        to={ROUTES.episodeList.path + "/" + data.id}
+      >
+        {data.name}
+      </Link>
+    </li>
+  );
+}
 
 export function EpisodesList() {
-  const { data, isLoading, error } = useFetch<IEpisode[]>("/episodes");
-  return (
-    <>
-      {isLoading ? (
-        "Загрузка"
-      ) : error ? (
-        error
-      ) : (
-        <ul className="list">
-          {data.map((episode) => (
-            <li key={episode.id}>
-              <Link
-                className="hovered-card text-center text-xl font-bold"
-                to={ROUTES.episodeList.path + "/" + episode.id}
-              >
-                {episode.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
-    </>
-  );
+  return <BaseList ListItem={RenderEpisodes} url={ROUTES.episodeList.path} />;
 }

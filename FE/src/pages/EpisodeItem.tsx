@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
-import { useFetch } from "../hooks/useFetch";
 import type { IEpisode } from "../types";
-import { BaseName } from "../BaseName";
+import { BaseName } from "../components/BaseName";
+import { useFetchItem } from "../hooks/useFetchItem";
+import { ROUTES } from "../route";
 
 function EpisodeInfo({ name, air_date, episode }: IEpisode) {
   return (
@@ -15,7 +16,9 @@ function EpisodeInfo({ name, air_date, episode }: IEpisode) {
 
 export function EpisodeItem() {
   const { id } = useParams();
-  const { data, isLoading, error } = useFetch<IEpisode>("/episodes/" + id);
+  const { data, isLoading, error } = useFetchItem<IEpisode>(
+    ROUTES.episodeList.path + "/" + id,
+  );
   return (
     <>{isLoading ? "Загрузка" : error ? error : <EpisodeInfo {...data} />}</>
   );

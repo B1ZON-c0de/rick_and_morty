@@ -1,33 +1,26 @@
 import { Link } from "react-router-dom";
-import { useFetch } from "../hooks/useFetch";
-import type { ICharacter } from "../types";
+import type { ICharacter, IListChildrenProps } from "../types";
 import { ROUTES } from "../route";
+import { BaseList } from "../components/BaseList";
+
+function RenderCharacters({
+  data,
+  getLastNode,
+}: IListChildrenProps<ICharacter>) {
+  return (
+    <li ref={getLastNode} key={data.id}>
+      <Link to={ROUTES.characterList.path + "/" + data.id}>
+        <div className=" hovered-card">
+          <img className="w-full object-cover" src={data.image} />
+          <h2 className="text-xl font-bold text-center">{data.name}</h2>
+        </div>
+      </Link>
+    </li>
+  );
+}
 
 export function CharactersList() {
-  const { isLoading, data, error } = useFetch<ICharacter[]>("/characters");
-
   return (
-    <>
-      {isLoading ? (
-        "Загрузка"
-      ) : error ? (
-        error
-      ) : (
-        <ul className="list">
-          {data.map((character) => (
-            <li key={character.id}>
-              <Link to={ROUTES.characterList.path + "/" + character.id}>
-                <div className=" hovered-card">
-                  <img className="w-full object-cover" src={character.image} />
-                  <h2 className="text-xl font-bold text-center">
-                    {character.name}
-                  </h2>
-                </div>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
-    </>
+    <BaseList ListItem={RenderCharacters} url={ROUTES.characterList.path} />
   );
 }

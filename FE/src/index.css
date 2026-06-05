@@ -24,4 +24,8 @@
   .hovered-card {
     @apply flex flex-col gap-6 rounded-md bg-gray-50 border-2 border-transparent hover:border-green-600 transition-all duration-300 hover:shadow-lg hover:bg-green-200 hover:-translate-1 p-4;
   }
+
+  .btn-primary {
+    @apply bg-green-800 text-green-200 px-6 py-3 text-lg rounded-md hover:bg-green-700 transition-all duration-300 cursor-pointer;
+  }
 }
