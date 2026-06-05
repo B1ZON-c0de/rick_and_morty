@@ -28,7 +28,6 @@ export function BaseList<T extends ILocation | ICharacter | IEpisode>({
 
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && !isLoading && hasMore) {
-          console.log("page++");
           setPageNumber((prev) => prev + 1);
         }
       });
