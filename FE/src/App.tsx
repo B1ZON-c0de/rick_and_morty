@@ -1,5 +1,6 @@
 import { Routes, Route, NavLink } from "react-router-dom";
 import { ROUTES } from "./route";
+import { Suspense } from "react";
 
 const App = () => {
   return (
@@ -24,11 +25,20 @@ const App = () => {
           })}
         </ul>
       </header>
-      <Routes>
-        {Object.keys(ROUTES).map((key) => (
-          <Route path={ROUTES[key].path} element={ROUTES[key].element} />
-        ))}
-      </Routes>
+      <Suspense fallback={"Загрузка..."}>
+        <Routes>
+          {Object.keys(ROUTES).map((key) => {
+            const Component = ROUTES[key].element;
+            return (
+              <Route
+                key={ROUTES[key].path}
+                path={ROUTES[key].path}
+                element={<Component />}
+              />
+            );
+          })}
+        </Routes>
+      </Suspense>
     </>
   );
 };

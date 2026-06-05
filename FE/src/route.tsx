@@ -1,34 +1,56 @@
-import type { ReactNode } from "react";
-import {
-  CharacterItem,
-  CharactersList,
-  LocationItem,
-  LocationsList,
-  EpisodeItem,
-  EpisodesList,
-  Home,
-} from "./pages";
+import { lazy, type ComponentType, type LazyExoticComponent } from "react";
 
 interface RouteConfig {
   path: string;
   name?: string;
-  element: ReactNode;
+  element: LazyExoticComponent<ComponentType>;
 }
 
 export const ROUTES = {
-  home: { name: "Главная", path: "/", element: <Home /> },
+  home: {
+    name: "Главная",
+    path: "/",
+    element: lazy(() =>
+      import("./pages").then((module) => ({ default: module.Home })),
+    ),
+  },
   characterList: {
     name: "Персонажи",
     path: "/character",
-    element: <CharactersList />,
+    element: lazy(() =>
+      import("./pages").then((module) => ({ default: module.CharactersList })),
+    ),
   },
-  characterItem: { path: "/character/:id", element: <CharacterItem /> },
+  characterItem: {
+    path: "/character/:id",
+    element: lazy(() =>
+      import("./pages").then((module) => ({ default: module.CharacterItem })),
+    ),
+  },
   locationList: {
     name: "Локации",
     path: "/location",
-    element: <LocationsList />,
+    element: lazy(() =>
+      import("./pages").then((module) => ({ default: module.LocationsList })),
+    ),
   },
-  locationItem: { path: "/location/:id", element: <LocationItem /> },
-  episodeList: { name: "Эпизоды", path: "/episode", element: <EpisodesList /> },
-  episodeItem: { path: "/episode/:id", element: <EpisodeItem /> },
+  locationItem: {
+    path: "/location/:id",
+    element: lazy(() =>
+      import("./pages").then((module) => ({ default: module.LocationItem })),
+    ),
+  },
+  episodeList: {
+    name: "Эпизоды",
+    path: "/episode",
+    element: lazy(() =>
+      import("./pages").then((module) => ({ default: module.EpisodesList })),
+    ),
+  },
+  episodeItem: {
+    path: "/episode/:id",
+    element: lazy(() =>
+      import("./pages").then((module) => ({ default: module.EpisodeItem })),
+    ),
+  },
 } as const satisfies Record<string, RouteConfig>;
