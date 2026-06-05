@@ -13,7 +13,10 @@ interface IResponse<T> {
   results: T;
 }
 
-export const useFetch = <T extends object>(url: string) => {
+export const useFetch = <T extends object>(
+  url: string,
+  pageNumber?: number,
+) => {
   const [error, setError] = useState<string>("");
   const [data, setData] = useState<T | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -24,6 +27,9 @@ export const useFetch = <T extends object>(url: string) => {
     try {
       const res = await axios.get<IResponse<T> | T>(
         "https://rickandmortyapi.com/api/" + url,
+        {
+          params: pageNumber,
+        },
       );
       if ("results" in res.data) {
         setData(res.data.results);
