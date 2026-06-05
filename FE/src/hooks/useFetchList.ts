@@ -26,7 +26,7 @@ export const useFetchList = <T>(url: string, pageNumber?: number) => {
     setError("");
     try {
       const res = await axios.get<IResponse<T>>(
-        "https://rickandmortyapi.com/api/" + url,
+        import.meta.env.VITE_BACKEND + url,
         {
           cancelToken: new axios.CancelToken((c) => (cancel = c)),
           params: { page: pageNumber },

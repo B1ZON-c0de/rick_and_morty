@@ -13,7 +13,7 @@ export const useFetchItem = <T extends ICharacter | IEpisode | ILocation>(
     setError("");
     setIsLoading(true);
     try {
-      const res = await axios.get<T>("https://rickandmortyapi.com/api/" + url);
+      const res = await axios.get<T>(import.meta.env.VITE_BACKEND + url);
       setData(res.data);
     } catch (e) {
       if (e instanceof AxiosError) {
