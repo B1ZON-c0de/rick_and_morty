@@ -7,6 +7,7 @@ import type {
   ILocation,
 } from "../types";
 import { Loader } from "@mantine/core";
+import { BaseLoader } from "./BaseLoader";
 
 interface Props<T> {
   ListItem: ComponentType<IListChildrenProps<T>>;
@@ -51,7 +52,7 @@ export function BaseList<T extends ILocation | ICharacter | IEpisode>({
           }
         })}
       </ul>
-      {isLoading && <Loader color="green" />}
+      {isLoading && <BaseLoader />}
       {error && <div>{error}</div>}
     </>
   );

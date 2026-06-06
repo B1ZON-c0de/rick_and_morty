@@ -3,6 +3,7 @@ import { ROUTES } from "./route";
 import { lazy, Suspense } from "react";
 import { Loader } from "@mantine/core";
 import "@mantine/core/styles.css";
+import { BaseLoader } from "./components/BaseLoader";
 
 const App = () => {
   const NotFound = lazy(() =>
@@ -32,7 +33,7 @@ const App = () => {
           })}
         </ul>
       </header>
-      <Suspense fallback={<Loader color="green" />}>
+      <Suspense fallback={<BaseLoader />}>
         <Routes>
           {Object.keys(ROUTES).map((key) => {
             const Component = ROUTES[key].element;

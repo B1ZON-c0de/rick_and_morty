@@ -4,6 +4,7 @@ import { BaseName } from "../components/BaseName";
 import { useFetchItem } from "../hooks/useFetchItem";
 import { ROUTES } from "../route";
 import { Loader } from "@mantine/core";
+import { BaseLoader } from "../components/BaseLoader";
 
 function LocationInfo({ name, type, dimension }: ILocation) {
   return (
@@ -22,13 +23,7 @@ export function LocationItem() {
   );
   return (
     <>
-      {isLoading ? (
-        <Loader color="green" />
-      ) : error ? (
-        error
-      ) : (
-        <LocationInfo {...data} />
-      )}
+      {isLoading ? <BaseLoader /> : error ? error : <LocationInfo {...data} />}
     </>
   );
 }

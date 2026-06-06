@@ -4,6 +4,7 @@ import { BaseName } from "../components/BaseName";
 import { useFetchItem } from "../hooks/useFetchItem";
 import { ROUTES } from "../route";
 import { Loader } from "@mantine/core";
+import { BaseLoader } from "../components/BaseLoader";
 
 function EpisodeInfo({ name, air_date, episode }: IEpisode) {
   return (
@@ -22,13 +23,7 @@ export function EpisodeItem() {
   );
   return (
     <>
-      {isLoading ? (
-        <Loader color="green" />
-      ) : error ? (
-        error
-      ) : (
-        <EpisodeInfo {...data} />
-      )}
+      {isLoading ? <BaseLoader /> : error ? error : <EpisodeInfo {...data} />}
     </>
   );
 }

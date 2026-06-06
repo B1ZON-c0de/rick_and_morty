@@ -4,6 +4,7 @@ import { BaseName } from "../components/BaseName";
 import { useFetchItem } from "../hooks/useFetchItem";
 import { ROUTES } from "../route";
 import { Center, Loader } from "@mantine/core";
+import { BaseLoader } from "../components/BaseLoader";
 
 function CharacterInfo({
   name,
@@ -45,13 +46,7 @@ export function CharacterItem() {
   );
   return (
     <>
-      {isLoading ? (
-        <Loader color="green" />
-      ) : error ? (
-        error
-      ) : (
-        <CharacterInfo {...data} />
-      )}
+      {isLoading ? <BaseLoader /> : error ? error : <CharacterInfo {...data} />}
     </>
   );
 }
