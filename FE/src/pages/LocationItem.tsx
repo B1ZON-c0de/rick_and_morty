@@ -3,6 +3,7 @@ import type { ILocation } from "../types";
 import { BaseName } from "../components/BaseName";
 import { useFetchItem } from "../hooks/useFetchItem";
 import { ROUTES } from "../route";
+import { BaseLoader } from "../components/BaseLoader";
 
 function LocationInfo({ name, type, dimension }: ILocation) {
   return (
@@ -20,6 +21,8 @@ export function LocationItem() {
     ROUTES.locationList.path + "/" + id,
   );
   return (
-    <>{isLoading ? "Загрузка" : error ? error : <LocationInfo {...data} />}</>
+    <>
+      {isLoading ? <BaseLoader /> : error ? error : <LocationInfo {...data} />}
+    </>
   );
 }

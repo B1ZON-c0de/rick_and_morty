@@ -6,6 +6,7 @@ import type {
   IListChildrenProps,
   ILocation,
 } from "../types";
+import { BaseLoader } from "./BaseLoader";
 
 interface Props<T> {
   ListItem: ComponentType<IListChildrenProps<T>>;
@@ -50,7 +51,7 @@ export function BaseList<T extends ILocation | ICharacter | IEpisode>({
           }
         })}
       </ul>
-      {isLoading && <div>Загрузка...</div>}
+      {isLoading && <BaseLoader />}
       {error && <div>{error}</div>}
     </>
   );

@@ -1,6 +1,8 @@
 import { Routes, Route, NavLink } from "react-router-dom";
 import { ROUTES } from "./route";
 import { lazy, Suspense } from "react";
+import "@mantine/core/styles.css";
+import { BaseLoader } from "./components/BaseLoader";
 
 const App = () => {
   const NotFound = lazy(() =>
@@ -30,7 +32,7 @@ const App = () => {
           })}
         </ul>
       </header>
-      <Suspense fallback={"Загрузка..."}>
+      <Suspense fallback={<BaseLoader />}>
         <Routes>
           {Object.keys(ROUTES).map((key) => {
             const Component = ROUTES[key].element;

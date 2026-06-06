@@ -3,6 +3,7 @@ import type { IEpisode } from "../types";
 import { BaseName } from "../components/BaseName";
 import { useFetchItem } from "../hooks/useFetchItem";
 import { ROUTES } from "../route";
+import { BaseLoader } from "../components/BaseLoader";
 
 function EpisodeInfo({ name, air_date, episode }: IEpisode) {
   return (
@@ -20,6 +21,8 @@ export function EpisodeItem() {
     ROUTES.episodeList.path + "/" + id,
   );
   return (
-    <>{isLoading ? "Загрузка" : error ? error : <EpisodeInfo {...data} />}</>
+    <>
+      {isLoading ? <BaseLoader /> : error ? error : <EpisodeInfo {...data} />}
+    </>
   );
 }
