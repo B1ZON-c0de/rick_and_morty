@@ -3,6 +3,7 @@ import type { ICharacter } from "../types";
 import { BaseName } from "../components/BaseName";
 import { useFetchItem } from "../hooks/useFetchItem";
 import { ROUTES } from "../route";
+import { BaseLoader } from "../components/BaseLoader";
 
 function CharacterInfo({
   name,
@@ -43,6 +44,8 @@ export function CharacterItem() {
     ROUTES.characterList.path + "/" + id,
   );
   return (
-    <>{isLoading ? "Загрузка" : error ? error : <CharacterInfo {...data} />}</>
+    <>
+      {isLoading ? <BaseLoader /> : error ? error : <CharacterInfo {...data} />}
+    </>
   );
 }
