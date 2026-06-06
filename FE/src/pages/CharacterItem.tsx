@@ -3,7 +3,6 @@ import type { ICharacter } from "../types";
 import { BaseName } from "../components/BaseName";
 import { useFetchItem } from "../hooks/useFetchItem";
 import { ROUTES } from "../route";
-import { Center, Loader } from "@mantine/core";
 import { BaseLoader } from "../components/BaseLoader";
 
 function CharacterInfo({

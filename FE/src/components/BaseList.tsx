@@ -6,7 +6,6 @@ import type {
   IListChildrenProps,
   ILocation,
 } from "../types";
-import { Loader } from "@mantine/core";
 import { BaseLoader } from "./BaseLoader";
 
 interface Props<T> {

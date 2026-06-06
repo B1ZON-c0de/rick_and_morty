@@ -1,7 +1,6 @@
 import { Routes, Route, NavLink } from "react-router-dom";
 import { ROUTES } from "./route";
 import { lazy, Suspense } from "react";
-import { Loader } from "@mantine/core";
 import "@mantine/core/styles.css";
 import { BaseLoader } from "./components/BaseLoader";
 

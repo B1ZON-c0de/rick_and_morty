@@ -3,7 +3,6 @@ import type { IEpisode } from "../types";
 import { BaseName } from "../components/BaseName";
 import { useFetchItem } from "../hooks/useFetchItem";
 import { ROUTES } from "../route";
-import { Loader } from "@mantine/core";
 import { BaseLoader } from "../components/BaseLoader";
 
 function EpisodeInfo({ name, air_date, episode }: IEpisode) {
